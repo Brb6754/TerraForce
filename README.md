@@ -18,7 +18,6 @@ Ejecución desde el código fuente:
 - Python: 3.8 o superior.
 - Biblioteca: Pygame 2.0 o superior.
 
-
 🧠 Estructuras de Datos y Algoritmos (EDA)
 El núcleo lógico de TerraForm reside en un conjunto de Estructuras de Datos y Algoritmos (EDA) personalizados que orquestan el flujo de tareas y la toma de decisiones de la colonia.
 📥 Flujo de Tareas: 
@@ -32,10 +31,9 @@ El sistema de planificación utiliza dos estructuras principales para gestionar 
 
 
 - Min-Heap (Montículo Mínimo) - Cola de Prioridad:
-  Propósito: Es la cola de prioridad central que garantiza que la tarea más urgente sea siempre la primera en ser extraída666666666666.
-  Rol: Almacena tuplas (prioridad, Acción), ordenando automáticamente las tareas por su valor de prioridad7777.
+  Propósito: Es la cola de prioridad central que garantiza que la tarea más urgente sea siempre la primera en ser extraída.
+  Rol: Almacena tuplas (prioridad, Acción), ordenando automáticamente las tareas por su valor de prioridad.
   Eficiencia: Se eligió sobre una lista ordenada porque el Heap asegura una inserción y extracción de tareas priorizadas de forma óptima O(log n)
-
 
 
 -⚙️ Algoritmo de Decisión (Asignación de Colonos)
