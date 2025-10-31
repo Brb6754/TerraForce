@@ -332,8 +332,4 @@ Inspirado en la profundidad de *Dwarf Fortress* y la elegancia de las estructura
 
 **¿Listo para colonizar Lazarus?** 🌍✨
 
-```bash
-python panel_control.py
-```
-
 *"En el vacío del espacio, solo la planificación y la adaptación garantizan la supervivencia."*
