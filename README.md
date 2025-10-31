@@ -286,7 +286,7 @@ El proyecto incluye documentación detallada para desarrolladores:
 - **Sin pathfinding**: Los colonos se mueven en línea recta y pueden atascarse en obstáculos (ríos, montañas).
 - **Combate abstracto**: Los eventos de defensa aplican daño directo, sin combate visual.
 - **Necesidades simplificadas**: No hay hambre/sed/sueño individuales por colono.
-- **Sin Game Over explícito**: La simulación continúa incluso si pierdes todos los colonos.
+
 
 ---
 
