@@ -19,7 +19,28 @@ Ejecución desde el código fuente:
 - Biblioteca: Pygame 2.0 o superior.
 
 
-Estructura,Propósito,Operaciones Clave,Complejidad,Uso en el Sistema
-Queue (Cola),"Búfer de entrada para las órdenes del jugador (FIFO)[cite: 395, 526].",encolar() y desencolar()[cite: 475].,O(1) y O(n)[cite: 527].,simulador.cola_acciones[cite: 528].
-Min-Heap,"Cola de Prioridad central (extrae siempre la más urgente)[cite: 394, 531].","insertar() y extraer_minimo()[cite: 473, 531].",O(logn)[cite: 531].,simulador.heap_prioridades[cite: 532].
-Linked List,"Almacenamiento del historial de eventos y notificaciones[cite: 534, 336].",agregar()[cite: 535].,O(n)[cite: 535].,simulador.historial[cite: 536].
+🧠 Estructuras de Datos y Algoritmos (EDA)
+El núcleo lógico de TerraForm reside en un conjunto de Estructuras de Datos y Algoritmos (EDA) personalizados que orquestan el flujo de tareas y la toma de decisiones de la colonia.
+📥 Flujo de Tareas: 
+
+Queue y Min-Heap
+El sistema de planificación utiliza dos estructuras principales para gestionar las órdenes del jugador y las prioridades de la colonia
+-Queue (Cola) - Búfer de Acciones:
+  Propósito: Sirve como el búfer de entrada (FIFO) donde el jugador encola las tareas (órdenes) a través de la interfaz (GUI).
+  Rol: Almacena las tareas antes de que el planificador las procese.
+  Comportamiento: Las órdenes se atienden por orden de llegada, pero aún no están priorizadaS
+
+
+- Min-Heap (Montículo Mínimo) - Cola de Prioridad:
+  Propósito: Es la cola de prioridad central que garantiza que la tarea más urgente sea siempre la primera en ser extraída666666666666.
+  Rol: Almacena tuplas (prioridad, Acción), ordenando automáticamente las tareas por su valor de prioridad7777.
+  Eficiencia: Se eligió sobre una lista ordenada porque el Heap asegura una inserción y extracción de tareas priorizadas de forma óptima O(log n)
+
+
+
+-⚙️ Algoritmo de Decisión (Asignación de Colonos)
+El algoritmo simulador.encontrar_mejor_colono() es el corazón de la IA y determina quién realiza qué tarea:
+  Extracción Prioritaria: El planificador extrae la acción más urgente (el valor de prioridad más bajo) del Min-Heap10.
+  Filtro de Disponibilidad: Se evalúa a todos los colonos que estén disponibles (ocupado = False) y que sean aptos para realizar el tipo de acción requerida11.
+  Cálculo de Puntaje (Eficiencia): A cada colono apto se le asigna un puntaje basado en su Aptitud y su proximidad a la zona de la tarea
+  Se selecciona el colono con el puntaje más alto, lo que garantiza que se elija al colono más eficiente y más cercano para la tarea13.
