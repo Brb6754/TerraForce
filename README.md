@@ -83,27 +83,6 @@ El planificador elige al individuo **más eficiente** (aptitud) y **más cercano
 
 ---
 
-## 🔧 Instalación
-
-### Opción 1: Ejecutar desde el código fuente
-
-```bash
-# 1. Clonar el repositorio
-git clone https://github.com/tu-usuario/terraform.git
-cd terraform
-
-# 2. Instalar dependencias
-pip install pygame
-
-# 3. Ejecutar el juego
-python panel_control.py
-```
-
-### Opción 2: Ejecutable (si está disponible)
-Descarga el archivo `.exe` (Windows) o `.app` (macOS) y ejecuta directamente. No requiere instalación de Python ni Pygame.
-
----
-
 ## 🎮 Cómo Jugar
 
 ### Guía Rápida: Tus Primeros 10 Minutos
