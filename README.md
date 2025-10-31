@@ -25,7 +25,7 @@ El núcleo lógico de TerraForm reside en un conjunto de Estructuras de Datos y 
 
 Queue y Min-Heap
 El sistema de planificación utiliza dos estructuras principales para gestionar las órdenes del jugador y las prioridades de la colonia
--Queue (Cola) - Búfer de Acciones:
+- Queue (Cola) - Búfer de Acciones:
   Propósito: Sirve como el búfer de entrada (FIFO) donde el jugador encola las tareas (órdenes) a través de la interfaz (GUI).
   Rol: Almacena las tareas antes de que el planificador las procese.
   Comportamiento: Las órdenes se atienden por orden de llegada, pero aún no están priorizadaS
