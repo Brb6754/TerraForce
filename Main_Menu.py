@@ -1,10 +1,8 @@
 import pygame
 import sys
 from random import uniform
-from panel_control import PanelControl
 
 def main_menu():
-    """Menú principal que ejecuta el juego al presionar 'Jugar'"""
     # Inicialización
     pygame.init()
     pygame.mixer.init()
@@ -53,12 +51,6 @@ def main_menu():
     btn_exit = pygame.Rect(W // 2 - BTN_W // 2, int(H * 0.80), BTN_W, BTN_H)
     font = pygame.font.SysFont(None, int(BTN_H * 0.55))
     
-    def draw_button(rect, color, color_hover, text, mouse_pos):
-        color_final = color_hover if rect.collidepoint(mouse_pos) else color
-        pygame.draw.rect(screen, color_final, rect, border_radius=BTN_RADIUS)
-        text_surf = font.render(text, True, BLACK)
-        screen.blit(text_surf, text_surf.get_rect(center=rect.center))
-    
     def update_stars(dt):
         for star in stars:
             star[1] += STAR_SPEED * dt
@@ -81,12 +73,15 @@ def main_menu():
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
-                running = False
+                pygame.quit()
+                sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if btn_play.collidepoint(event.pos):
                     start_cinematic = True
+                    running = False  # Salir del loop del menú
                 elif btn_exit.collidepoint(event.pos):
-                    running = False
+                    pygame.quit()
+                    sys.exit()
         
         # Actualizar estrellas
         update_stars(dt)
@@ -100,7 +95,6 @@ def main_menu():
             fade_alpha -= 200 * dt
             if fade_alpha <= 0:
                 fade_alpha = 0
-                running = False
         
         # Dibujar título y botones con fade
         if title_img and fade_alpha > 0:
@@ -132,9 +126,6 @@ def main_menu():
     # Si se inició la cinemática, mostrarla
     if start_cinematic:
         show_cinematics(screen, W, H, stars, STAR_SPEED, STAR_SIZE, clock)
-    else:
-        pygame.quit()
-        sys.exit()
 
 
 def show_cinematics(screen, W, H, stars, STAR_SPEED, STAR_SIZE, clock):
@@ -207,6 +198,7 @@ def show_cinematics(screen, W, H, stars, STAR_SPEED, STAR_SIZE, clock):
     text_progress = 0
     text_speed = 30  # caracteres por segundo
     all_complete = False
+    skip_cinematics = False
     
     running = True
     while running and current_cinematic < len(cinematics):
@@ -214,7 +206,8 @@ def show_cinematics(screen, W, H, stars, STAR_SPEED, STAR_SIZE, clock):
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
-                running = False
+                pygame.quit()
+                sys.exit()
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 # Si las animaciones no han terminado, completarlas todas
                 if not all_complete:
@@ -226,6 +219,7 @@ def show_cinematics(screen, W, H, stars, STAR_SPEED, STAR_SIZE, clock):
                     current_cinematic += 1
                     # Verificar si hay más cinemáticas
                     if current_cinematic >= len(cinematics):
+                        skip_cinematics = True
                         running = False
                     else:
                         fade_in_alpha = 0
@@ -283,22 +277,16 @@ def show_cinematics(screen, W, H, stars, STAR_SPEED, STAR_SIZE, clock):
             
             pygame.display.flip()
     
-    if running:
+    # Terminar cinemáticas y pasar al juego SOLO si completó todas
+    if skip_cinematics or (running == False and current_cinematic >= len(cinematics)):
         pygame.mixer.music.stop()  # Detener música del menú
-        iniciar_juego()
-    else:
-        iniciar_juego()
-
-
-def iniciar_juego():
-    """Inicia el juego principal"""
-    print("🎮 Iniciando juego...")
-    panel = PanelControl()
-    panel.ejecutar()
-
-
-if __name__ == "__main__":
-    main_menu()
-    
-
-
+         # Música del juego
+        try:
+            pygame.mixer.music.load("Assets/Musica/Interstellar.ogg")
+            #pygame.mixer.music.load("Assets/Musica/spacebk.ogg")
+            pygame.mixer.music.set_volume(0.7)
+            pygame.mixer.music.play(-1)
+        except:
+            print("[AVISO] No se pudo cargar la música")
+        from panel_control import ejecutar_juego
+        ejecutar_juego()

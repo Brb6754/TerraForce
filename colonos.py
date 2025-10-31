@@ -176,7 +176,7 @@ class Ingeniero(Colono):
 class Biologo(Colono):
     def __init__(self, nombre, id_colono, genero):
         super().__init__(nombre, id_colono, genero, edad_inicial=random.randint(20, 35))
-        self.tipo = "Biólogo"
+        self.tipo = "Biologo"
         self.velocidad = 10.0  
         self.aptitudes = {
             "recolectar_alimentos": 0.95, "cultivar": 0.90,
